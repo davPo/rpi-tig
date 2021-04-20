@@ -27,6 +27,7 @@ docker-compose up -d
 
 echo -n "Waiting for InfluxDB to come up..."
 sleep 20
+PASSWORD="$(grep INFLUXDB_ADMIN_PASSWORD env.influxdb | awk -F '=' '{print $2}')"
 while ! $(docker exec -it influxdb influx -password $PASSWORD -username 'admin' -execute 'show databases' | grep -q telegraf); do
   echo -n "."
 done

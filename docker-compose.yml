@@ -1,5 +1,15 @@
+mqtt:
+  image: eclipse-mosquitto:latest
+  container_name: mosquitto
+  restart: always
+  ports:
+    - "1883:1883"
+    - "9001:9001"
+  # volumes: 
+  #   - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
 influxdb:
-  image: influxdb:1.8.4-alpine
+  image: influxdb:1.8.4
   container_name: influxdb
   restart: always
 #  mem_limit: 192m
