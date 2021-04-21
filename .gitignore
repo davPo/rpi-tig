@@ -1,2 +1,6 @@
-grafana/data
-influxdb/data/meta/meta.db
+grafana/data/plugins
+grafana/data/plugins
+grafana/data/grafana.db
+influxdb/data/meta
+influxdb/data/data
+influxdb/data/wal
