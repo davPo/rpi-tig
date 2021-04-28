@@ -1,3 +1,21 @@
+# mosquitto:
+#   image: eclipse-mosquitto:latest
+#   container_name: mosquitto
+#   restart: always
+#   expose:
+#     - "1883"
+#     - "9001"
+#   ports:
+#     - "1883:1883"
+#     - "9001:9001"
+#   volumes:
+#     # Configuration
+#     - ./mosquitto/mosquitto.conf/:/mosquitto/config/mosquitto.conf
+#    # - ./mosquitto/mosquitto.conf/:/etc/mosquitto/mosquitto.conf:ro
+#     # Data and Log
+#     - /mosquitto/data 
+#     - /mosquitto/log 
+
 mosquitto:
   image: eclipse-mosquitto:latest
   container_name: mosquitto
@@ -5,13 +23,9 @@ mosquitto:
   ports:
     - "1883:1883"
     - "9001:9001"
-  volumes:
-    # Configuration
-    - ./mosquitto/mosquitto.conf/:/etc/mosquitto/mosquitto.conf:ro
-    # Data and Log
-    - /mosquitto/data 
-    - /mosquitto/log 
-
+  volumes: 
+    - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    
 influxdb:
   image: influxdb:1.8.4
   container_name: influxdb
@@ -44,10 +58,18 @@ telegraf:
     - "8125:8125/udp"
   links:
     - influxdb
+    - mosquitto
   volumes:
     - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
     - /proc:/host/proc:ro
     - /var/log:/host/var/log:ro
+  # new
+  # depends_on:
+  #   - influxdb
+  #   - mosquitto
+  # links:
+  #   - mosquitto
+  #   - influxdb
 
 grafana:
   image: grafana/grafana
