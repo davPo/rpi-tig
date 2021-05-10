@@ -34,3 +34,8 @@ Look in the `utils` directory for the files you should install on your Pi to spa
 - Thanks to docker-compose/Docker, the stack will survive a reboot
 - Provisioned dashboards on Grafana cannot be saved, so they really should be used as templates, and saved as a new Dashboard if you want to edit/modify them
 - Feel free to contribute PRs with useful dashboards if you have some
+
+# TODO
+telegraf.conf
+reset password
+suppress output to json file
